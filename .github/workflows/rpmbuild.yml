@@ -1,0 +1,25 @@
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: build RPM package
+      uses: naveenrajm7/rpmbuild@latest
+      with:
+        spec_file: "SPECS/openssl.spec"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Binary RPM
+        path: ${{ steps.rpm.outputs.rpm_dir_apth }}
+
