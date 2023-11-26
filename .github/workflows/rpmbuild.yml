@@ -9,7 +9,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: docker.io/cevin/rpmbuild:rhel9
+    container: docker.io/cevin/rpmbuild:rhel9-openssl
     steps:
     - uses: actions/checkout@v3
 
