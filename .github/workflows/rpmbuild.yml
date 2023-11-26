@@ -14,7 +14,7 @@ jobs:
 
     - name: build RPM package
       run: |
-          sudo apt-get install -y rpmbuild \
+          sudo apt-get install -y rpm \
           && rpmbuild SPECS/openssl.spec
 
     - name: Upload artifact
