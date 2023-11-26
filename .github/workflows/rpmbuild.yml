@@ -15,8 +15,7 @@ jobs:
 
     - name: build RPM package
       run: |
-          dnf install which make gcc perl perl-WWW-Curl perl-CPAN perl-IPC-Cmd perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker rpm-build  -y \
-          && rpmbuild -ba SPECS/openssl.spec 
+          rpmbuild -ba SPECS/openssl.spec 
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
