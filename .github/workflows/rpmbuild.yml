@@ -9,7 +9,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: fedora:39
+    container: docker.io/cevin/rpmbuild:rhel9
     steps:
     - uses: actions/checkout@v3
 
