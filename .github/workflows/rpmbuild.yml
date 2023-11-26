@@ -14,7 +14,9 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: build RPM package
-      run: pwd; ls -lhar / ; ls -lhar ~/
+      run: |
+          dnf install which make gcc perl perl-WWW-Curl perl-CPAN perl-IPC-Cmd perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker rpm-build  -y \
+          rpmbuild -ba SPECS/openssl.spec 
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
