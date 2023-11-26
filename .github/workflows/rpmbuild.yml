@@ -9,13 +9,12 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: fedora:39
     steps:
     - uses: actions/checkout@v3
 
     - name: build RPM package
-      run: |
-          sudo apt-get install -y rpm \
-          && rpmbuild -ba SPECS/openssl.spec
+      run: ls -lhar / ; ls -lhar ~/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
