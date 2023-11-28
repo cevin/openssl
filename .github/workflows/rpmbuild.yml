@@ -15,7 +15,7 @@ jobs:
 
     - name: build RPM package
       run: |
-          rpmbuild --define "_topdir `pwd`" --build-in-place -ba SPECS/openssl.spec 
+          rpmbuild --define "_topdir `pwd`" -ba SPECS/openssl.spec 
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
