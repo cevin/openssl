@@ -34,145 +34,145 @@ Epoch:                1
 # We have to remove certain patented algorithms from the openssl source
 # tarball with the hobble-openssl script which is included below.
 # The original openssl upstream tarball cannot be shipped in the .src.rpm.
-Source:               openssl-%{version}.tar.gz
-Source2:              Makefile.certificate
-Source3:              genpatches
-Source6:              make-dummy-cert
-Source7:              renew-dummy-cert
-Source9:              configuration-switch.h
-Source10:             configuration-prefix.h
-Source14:             0025-for-tests.patch
+Source:               %{_sourcedir}/openssl-%{version}.tar.gz
+Source2:              %{_sourcedir}/Makefile.certificate
+Source3:              %{_sourcedir}/genpatches
+Source6:              %{_sourcedir}/make-dummy-cert
+Source7:              %{_sourcedir}/renew-dummy-cert
+Source9:              %{_sourcedir}/configuration-switch.h
+Source10:             %{_sourcedir}/configuration-prefix.h
+Source14:             %{_sourcedir}/0025-for-tests.patch
 
 # Patches exported from source git
 # Aarch64 and ppc64le use lib64
-Patch1:               0001-Aarch64-and-ppc64le-use-lib64.patch
+Patch1:               %{_sourcedir}/0001-Aarch64-and-ppc64le-use-lib64.patch
 # Use more general default values in openssl.cnf
-Patch2:               0002-Use-more-general-default-values-in-openssl.cnf.patch
+Patch2:               %{_sourcedir}/0002-Use-more-general-default-values-in-openssl.cnf.patch
 # Do not install html docs
-Patch3:               0003-Do-not-install-html-docs.patch
+Patch3:               %{_sourcedir}/0003-Do-not-install-html-docs.patch
 # Override default paths for the CA directory tree
-Patch4:               0004-Override-default-paths-for-the-CA-directory-tree.patch
+Patch4:               %{_sourcedir}/0004-Override-default-paths-for-the-CA-directory-tree.patch
 # apps/ca: fix md option help text
-Patch5:               0005-apps-ca-fix-md-option-help-text.patch
+Patch5:               %{_sourcedir}/0005-apps-ca-fix-md-option-help-text.patch
 # Disable signature verification with totally unsafe hash algorithms
-Patch6:               0006-Disable-signature-verification-with-totally-unsafe-h.patch
+Patch6:               %{_sourcedir}/0006-Disable-signature-verification-with-totally-unsafe-h.patch
 # Add support for PROFILE=SYSTEM system default cipherlist
-Patch7:               0007-Add-support-for-PROFILE-SYSTEM-system-default-cipher.patch
+Patch7:               %{_sourcedir}/0007-Add-support-for-PROFILE-SYSTEM-system-default-cipher.patch
 # Add FIPS_mode() compatibility macro
-Patch8:               0008-Add-FIPS_mode-compatibility-macro.patch
+Patch8:               %{_sourcedir}/0008-Add-FIPS_mode-compatibility-macro.patch
 # Add check to see if fips flag is enabled in kernel
-Patch9:               0009-Add-Kernel-FIPS-mode-flag-support.patch
+Patch9:               %{_sourcedir}/0009-Add-Kernel-FIPS-mode-flag-support.patch
 # Instead of replacing ectest.c and ec_curve.c, add the changes as a patch so
 # that new modifications made to these files by upstream are not lost. 
-Patch10:              0010-Add-changes-to-ectest-and-eccurve.patch
+Patch10:              %{_sourcedir}/0010-Add-changes-to-ectest-and-eccurve.patch
 # remove unsupported EC curves
-Patch11:              0011-Remove-EC-curves.patch
+Patch11:              %{_sourcedir}/0011-Remove-EC-curves.patch
 # Disable explicit EC curves
 # https://bugzilla.redhat.com/show_bug.cgi?id=2066412
-Patch12:              0012-Disable-explicit-ec.patch
+Patch12:              %{_sourcedir}/0012-Disable-explicit-ec.patch
 #Skipped tests from former 0011-Remove-EC-curves.patch
-Patch13:              0013-skipped-tests-EC-curves.patch
+Patch13:              %{_sourcedir}/0013-skipped-tests-EC-curves.patch
 # Instructions to load legacy provider in openssl.cnf
-Patch24:              0024-load-legacy-prov.patch
+Patch24:              %{_sourcedir}/0024-load-legacy-prov.patch
 # We load FIPS provider and set FIPS properties implicitly
-Patch32:              0032-Force-fips.patch
+Patch32:              %{_sourcedir}/0032-Force-fips.patch
 # Embed HMAC into the fips.so
-Patch33:              0033-FIPS-embed-hmac.patch
+Patch33:              %{_sourcedir}/0033-FIPS-embed-hmac.patch
 # Comment out fipsinstall command-line utility
-Patch34:              0034.fipsinstall_disable.patch
+Patch34:              %{_sourcedir}/0034.fipsinstall_disable.patch
 # Skip unavailable algorithms running `openssl speed`
-Patch35:              0035-speed-skip-unavailable-dgst.patch
+Patch35:             %{_sourcedir}/0035-speed-skip-unavailable-dgst.patch
 # Extra public/private key checks required by FIPS-140-3
-Patch44:              0044-FIPS-140-3-keychecks.patch
+Patch44:              %{_sourcedir}/0044-FIPS-140-3-keychecks.patch
 # Minimize fips services
-Patch45:              0045-FIPS-services-minimize.patch
+Patch45:              %{_sourcedir}/0045-FIPS-services-minimize.patch
 # Execute KATS before HMAC verification
-Patch47:              0047-FIPS-early-KATS.patch
+Patch47:              %{_sourcedir}/0047-FIPS-early-KATS.patch
 # Selectively disallow SHA1 signatures
-Patch49:              0049-Selectively-disallow-SHA1-signatures.patch
+Patch49:              %{_sourcedir}/0049-Selectively-disallow-SHA1-signatures.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2049265
-Patch50:              0050-FIPS-enable-pkcs12-mac.patch
+Patch50:              %{_sourcedir}/0050-FIPS-enable-pkcs12-mac.patch
 # Allow SHA1 in seclevel 2 if rh-allow-sha1-signatures = yes
-Patch52:              0052-Allow-SHA1-in-seclevel-2-if-rh-allow-sha1-signatures.patch
+Patch52:              %{_sourcedir}/0052-Allow-SHA1-in-seclevel-2-if-rh-allow-sha1-signatures.patch
 # Originally from https://github.com/openssl/openssl/pull/18103
 # As we rebased to 3.0.7 and used the version of the function
 # not matching the upstream one, we have to use aliasing.
 # When we eliminate this patch, the `-Wl,--allow-multiple-definition`
 # should also be removed
-Patch56:              0056-strcasecmp.patch
+Patch56:              %{_sourcedir}/0056-strcasecmp.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2053289
-Patch58:              0058-FIPS-limit-rsa-encrypt.patch
+Patch58:              %{_sourcedir}/0058-FIPS-limit-rsa-encrypt.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2087147
-Patch61:              0061-Deny-SHA-1-signature-verification-in-FIPS-provider.patch
-Patch62:              0062-fips-Expose-a-FIPS-indicator.patch
+Patch61:              %{_sourcedir}/0061-Deny-SHA-1-signature-verification-in-FIPS-provider.patch
+Patch62:              %{_sourcedir}/0062-fips-Expose-a-FIPS-indicator.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2102535
-Patch73:              0073-FIPS-Use-OAEP-in-KATs-support-fixed-OAEP-seed.patch
+Patch73:              %{_sourcedir}/0073-FIPS-Use-OAEP-in-KATs-support-fixed-OAEP-seed.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2102535
-Patch74:              0074-FIPS-Use-digest_sign-digest_verify-in-self-test.patch
+Patch74:              %{_sourcedir}/0074-FIPS-Use-digest_sign-digest_verify-in-self-test.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2102535
-Patch75:              0075-FIPS-Use-FFDHE2048-in-self-test.patch
+Patch75:              %{_sourcedir}/0075-FIPS-Use-FFDHE2048-in-self-test.patch
 # Downstream only. Reseed DRBG using getrandom(GRND_RANDOM)
 # https://bugzilla.redhat.com/show_bug.cgi?id=2102541
-Patch76:              0076-FIPS-140-3-DRBG.patch
+Patch76:              %{_sourcedir}/0076-FIPS-140-3-DRBG.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2102542
-Patch77:              0077-FIPS-140-3-zeroization.patch
+Patch77:              %{_sourcedir}/0077-FIPS-140-3-zeroization.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2114772
 # https://bugzilla.redhat.com/show_bug.cgi?id=2141695
 # https://bugzilla.redhat.com/show_bug.cgi?id=2160733
 # https://bugzilla.redhat.com/show_bug.cgi?id=2164763
-Patch78:              0078-KDF-Add-FIPS-indicators.patch
+Patch78:              %{_sourcedir}/0078-KDF-Add-FIPS-indicators.patch
 #https://bugzilla.redhat.com/show_bug.cgi?id=2141748
-Patch80:              0080-rand-Forbid-truncated-hashes-SHA-3-in-FIPS-prov.patch
+Patch80:              %{_sourcedir}/0080-rand-Forbid-truncated-hashes-SHA-3-in-FIPS-prov.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2142131
-Patch81:              0081-signature-Remove-X9.31-padding-from-FIPS-prov.patch
+Patch81:              %{_sourcedir}/0081-signature-Remove-X9.31-padding-from-FIPS-prov.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2136250
-Patch83:              0083-hmac-Add-explicit-FIPS-indicator-for-key-length.patch
+Patch83:              %{_sourcedir}/0083-hmac-Add-explicit-FIPS-indicator-for-key-length.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2137557
-Patch84:              0084-pbkdf2-Set-minimum-password-length-of-8-bytes.patch
+Patch84:              %{_sourcedir}/0084-pbkdf2-Set-minimum-password-length-of-8-bytes.patch
 #https://bugzilla.redhat.com/show_bug.cgi?id=2142121
-Patch85:              0085-FIPS-RSA-disable-shake.patch
+Patch85:              %{_sourcedir}/0085-FIPS-RSA-disable-shake.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2142087
-Patch88:              0088-signature-Add-indicator-for-PSS-salt-length.patch
+Patch88:              %{_sourcedir}/0088-signature-Add-indicator-for-PSS-salt-length.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2144561
-Patch91:              0091-FIPS-RSA-encapsulate.patch
+Patch91:              %{_sourcedir}/0091-FIPS-RSA-encapsulate.patch
 # FIPS-95
-Patch93:              0093-DH-Disable-FIPS-186-4-type-parameters-in-FIPS-mode.patch
+Patch93:              %{_sourcedir}/0093-DH-Disable-FIPS-186-4-type-parameters-in-FIPS-mode.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=2168289
-Patch110:             0110-GCM-Implement-explicit-FIPS-indicator-for-IV-gen.patch
-Patch112:             0112-pbdkf2-Set-indicator-if-pkcs5-param-disabled-checks.patch
+Patch110:             %{_sourcedir}/0110-GCM-Implement-explicit-FIPS-indicator-for-IV-gen.patch
+Patch112:             %{_sourcedir}/0112-pbdkf2-Set-indicator-if-pkcs5-param-disabled-checks.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2179331
-Patch113:             0113-asymciphers-kem-Add-explicit-FIPS-indicator.patch
+Patch113:             %{_sourcedir}/0113-asymciphers-kem-Add-explicit-FIPS-indicator.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2157951
-Patch114:             0114-FIPS-enforce-EMS-support.patch
+Patch114:             %{_sourcedir}/0114-FIPS-enforce-EMS-support.patch
 # skip quic and pairwise tests temporarily
-Patch115:             0115-skip-quic-pairwise.patch
+Patch115:             %{_sourcedir}/0115-skip-quic-pairwise.patch
 # Add version aliasing due to
 # https://github.com/openssl/openssl/issues/23534
-Patch116:             0116-version-aliasing.patch
+Patch116:             %{_sourcedir}/0116-version-aliasing.patch
 # https://github.com/openssl/openssl/issues/23050
-Patch117:             0117-ignore-unknown-sigalgorithms-groups.patch
+Patch117:             %{_sourcedir}/0117-ignore-unknown-sigalgorithms-groups.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=2160797
-Patch121:             0121-FIPS-cms-defaults.patch
+Patch121:             %{_sourcedir}/0121-FIPS-cms-defaults.patch
 # KTLS regression, temporary skip tests
-Patch122:             0122-TMP-KTLS-test-skip.patch
+Patch122:             %{_sourcedir}/0122-TMP-KTLS-test-skip.patch
 # HKDF regression with older provider implementations
-Patch123:             0123-kdf-Preserve-backward-compatibility-with-older-provi.patch
+Patch123:             %{_sourcedir}/0123-kdf-Preserve-backward-compatibility-with-older-provi.patch
 # https://github.com/openssl/openssl/pull/24717
-Patch124:             0124-Fix-SSL_select_next_proto.patch
-Patch125:             0125-More-correctly-handle-a-selected_len-of-0-when-proce.patch
-Patch126:             0126-Use-correctly-formatted-ALPN-data-in-tserver.patch
-Patch127:             0127-Clarify-the-SSL_select_next_proto-documentation.patch
-Patch128:             0128-Add-a-test-for-SSL_select_next_proto.patch
-Patch129:             0129-Allow-an-empty-NPN-ALPN-protocol-list-in-the-tests.patch
-Patch130:             0130-Correct-return-values-for-tls_construct_stoc_next_pr.patch
-Patch131:             0131-Add-ALPN-validation-in-the-client.patch
-Patch132:             0132-Add-explicit-testing-of-ALN-and-NPN-in-sslapitest.patch
-Patch133:             0133-Add-a-test-for-an-empty-NextProto-message.patch
-Patch136:             0136-CVE-2024-6119.patch
-Patch140:             0140-CVE-2024-12797.patch
-Patch141:             0001-remove-rhel-reference.patch
+Patch124:             %{_sourcedir}/0124-Fix-SSL_select_next_proto.patch
+Patch125:             %{_sourcedir}/0125-More-correctly-handle-a-selected_len-of-0-when-proce.patch
+Patch126:             %{_sourcedir}/0126-Use-correctly-formatted-ALPN-data-in-tserver.patch
+Patch127:             %{_sourcedir}/0127-Clarify-the-SSL_select_next_proto-documentation.patch
+Patch128:             %{_sourcedir}/0128-Add-a-test-for-SSL_select_next_proto.patch
+Patch129:             %{_sourcedir}/0129-Allow-an-empty-NPN-ALPN-protocol-list-in-the-tests.patch
+Patch130:             %{_sourcedir}/0130-Correct-return-values-for-tls_construct_stoc_next_pr.patch
+Patch131:             %{_sourcedir}/0131-Add-ALPN-validation-in-the-client.patch
+Patch132:             %{_sourcedir}/0132-Add-explicit-testing-of-ALN-and-NPN-in-sslapitest.patch
+Patch133:             %{_sourcedir}/0133-Add-a-test-for-an-empty-NextProto-message.patch
+Patch136:             %{_sourcedir}/0136-CVE-2024-6119.patch
+Patch140:             %{_sourcedir}/0140-CVE-2024-12797.patch
+Patch141:             %{_sourcedir}/0001-remove-rhel-reference.patch
 
 License:              ASL 2.0
 URL:                  http://www.openssl.org/
